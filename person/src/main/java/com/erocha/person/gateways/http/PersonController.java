@@ -2,6 +2,7 @@ package com.erocha.person.gateways.http;
 
 import com.erocha.person.domains.Contact;
 import com.erocha.person.domains.Person;
+import com.erocha.person.exception.BusinessException;
 import com.erocha.person.gateways.http.json.ContactTO;
 import com.erocha.person.gateways.http.json.PersonTO;
 import com.erocha.person.gateways.http.mapper.ContactMapper;
@@ -52,15 +53,15 @@ public class PersonController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Entities found"),
     })
-    public Page<PersonTO> gets(@RequestParam(value = "name",required = false) String name,
-                     @RequestParam(value = "identityDocument",required = false) String identityDocument,
-                     @RequestParam(value = "page", defaultValue = "0") Integer page,
-                     @RequestParam(value = "perPage", defaultValue = "5") Integer perPage,
-                     @RequestParam(value = "direction", defaultValue = "ASC") String direction,
-                     @RequestParam(value = "sortBy", required = false) String sortBy) {
+    public Page<PersonTO> gets(@RequestParam(value = "name", required = false) String name,
+                               @RequestParam(value = "identityDocument", required = false) String identityDocument,
+                               @RequestParam(value = "page", defaultValue = "0") Integer page,
+                               @RequestParam(value = "perPage", defaultValue = "5") Integer perPage,
+                               @RequestParam(value = "direction", defaultValue = "ASC") String direction,
+                               @RequestParam(value = "sortBy", required = false) String sortBy) {
 
-        PageRequest pageRequest = PageRequest.of(page,perPage,Sort.Direction.valueOf(direction),sortBy);
-        Page<Person> personPage = getPerson.execute(name,identityDocument,pageRequest);
+        PageRequest pageRequest = PageRequest.of(page, perPage, Sort.Direction.valueOf(direction), sortBy);
+        Page<Person> personPage = getPerson.execute(name, identityDocument, pageRequest);
         PersonMapper mapper = new PersonMapper();
 
         Page<PersonTO> personTOS = personPage.map(person -> mapper.toPersonTO(person));
@@ -109,10 +110,10 @@ public class PersonController {
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 404, message = "Not found")
     })
-    public void addContact(@PathVariable("personId") Integer personId,@Valid @RequestBody ContactTO contactTO){
+    public void addContact(@PathVariable("personId") Integer personId, @Valid @RequestBody ContactTO contactTO) {
         ContactMapper mapper = new ContactMapper();
         Contact contact = mapper.toContact(contactTO);
-        addContact.execute(personId,contact);
+        addContact.execute(personId, contact);
     }
 
     @DeleteMapping("/persons/{personId}/contacts/{contactId}")
@@ -122,8 +123,8 @@ public class PersonController {
             @ApiResponse(code = 204, message = "No Content"),
             @ApiResponse(code = 404, message = "Not found")
     })
-    public void addContact(@PathVariable("personId") Integer personId,@PathVariable("contactId") Integer contactId){
-        removeContact.execute(personId,contactId);
+    public void addContact(@PathVariable("personId") Integer personId, @PathVariable("contactId") Integer contactId) {
+        removeContact.execute(personId, contactId);
     }
 
 }
