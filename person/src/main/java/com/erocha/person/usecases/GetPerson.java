@@ -27,10 +27,8 @@ public class GetPerson {
         return gateway.findAll();
     }
 
-    public Page<Person> execute(String name, String identityDocument, String email,
-                                LocalDate dateBirth, PageRequest pageRequest) {
-        return gateway.findByNameOrIdentityDocumentOrEmailOrDateBirth(name, identityDocument, email,
-                dateBirth, pageRequest);
+    public Page<Person> execute(String name, String identityDocument,PageRequest pageRequest) {
+        return gateway.findByNameOrIdentityDocument(name, identityDocument, pageRequest);
     }
 
 

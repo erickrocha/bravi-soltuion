@@ -12,13 +12,11 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 
 @Repository
-public interface PersonRepository extends PagingAndSortingRepository<Person,Integer> {
+public interface PersonRepository extends PagingAndSortingRepository<Person, Integer> {
 
-    @Query("SELECT p FROM Person p JOIN p.contacts c WHERE p.name like :name or p.identityDocument = :identityDocument or c.value = :contact or p.dateBirth = :dateBirth")
-    Page<Person> findByNameOrIdentityDocumentOrEmailOrDateBirth(
+    @Query(value = "SELECT p FROM Person p WHERE name like :name or p.identityDocument = :identityDocument")
+    Page<Person> findByNameOrIdentityDocument(
             @Param("name") String name,
-            @Param("identityDocument") String identityDocument,
-            @Param("contact") String contact,
-            @Param("dateBirth") LocalDate dateBirth, Pageable pageRequest);
+            @Param("identityDocument") String identityDocument, Pageable pageRequest);
 
 }

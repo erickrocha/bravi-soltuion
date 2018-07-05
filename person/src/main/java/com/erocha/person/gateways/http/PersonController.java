@@ -48,15 +48,13 @@ public class PersonController {
     })
     public Page<PersonTO> gets(@RequestParam(value = "name",required = false) String name,
                      @RequestParam(value = "identityDocument",required = false) String identityDocument,
-                     @RequestParam(value = "email",required = false) String email,
-                     @RequestParam(value = "birthDate",required = false) LocalDate birthDate,
-                     @RequestParam(value = "page", defaultValue = "1") Integer page,
+                     @RequestParam(value = "page", defaultValue = "0") Integer page,
                      @RequestParam(value = "perPage", defaultValue = "5") Integer perPage,
                      @RequestParam(value = "direction", defaultValue = "ASC") String direction,
                      @RequestParam(value = "sortBy", required = false) String sortBy) {
 
         PageRequest pageRequest = PageRequest.of(page,perPage,Sort.Direction.valueOf(direction),sortBy);
-        Page<Person> personPage = getPerson.execute(name,identityDocument,email,birthDate,pageRequest);
+        Page<Person> personPage = getPerson.execute(name,identityDocument,pageRequest);
         PersonMapper mapper = new PersonMapper();
 
         Page<PersonTO> personTOS = personPage.map(person -> mapper.toPersonTO(person));

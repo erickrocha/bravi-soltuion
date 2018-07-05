@@ -23,10 +23,9 @@ public class PersonGateway {
         return Lists.newArrayList(repository.findAll());
     }
 
-    public Page<Person> findByNameOrIdentityDocumentOrEmailOrDateBirth(String name, String identityDocument,
-                                                                       String email, LocalDate dateBirth, PageRequest pageRequest) {
+    public Page<Person> findByNameOrIdentityDocument(String name, String identityDocument, PageRequest pageRequest) {
 
-        return repository.findByNameOrIdentityDocumentOrEmailOrDateBirth(name, identityDocument, email, dateBirth, pageRequest);
+        return repository.findByNameOrIdentityDocument(name, identityDocument, pageRequest);
     }
 
     public Person save(Person person) {
