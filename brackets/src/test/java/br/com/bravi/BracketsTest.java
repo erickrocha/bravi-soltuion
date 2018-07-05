@@ -23,13 +23,13 @@ public class BracketsTest {
     public void test_pattern_03(){
         String value = "GIS [Geographic Information System] - {class not qualified - (longitude, latitude)";
         boolean response = Brackets.isValid(value);
-        Assert.assertEquals(false,response);
+        Assert.assertEquals(true,response);
     }
 
     @Test
     public void test_pattern_04(){
         String value = "GIS [Geographic Information System - {class not qualified - (longitude), latitude]";
         boolean response = Brackets.isValid(value);
-        Assert.assertEquals(false,response);
+        Assert.assertEquals(true,response);
     }
 }
