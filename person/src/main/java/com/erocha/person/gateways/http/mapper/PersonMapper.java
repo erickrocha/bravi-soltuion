@@ -9,13 +9,15 @@ import java.util.List;
 public class PersonMapper {
 
     private AddressMapper addressMapper;
+    private ContactMapper contactMapper;
 
-    public PersonMapper(AddressMapper addressMapper) {
+    public PersonMapper(AddressMapper addressMapper, ContactMapper contactMapper) {
         this.addressMapper = addressMapper;
+        this.contactMapper = contactMapper;
     }
 
     public PersonMapper() {
-        this(new AddressMapper());
+        this(new AddressMapper(), new ContactMapper());
     }
 
     public PersonTO toPersonTO(Person person) {
@@ -25,8 +27,8 @@ public class PersonMapper {
                     .name(person.getName())
                     .dateBirth(person.getDateBirth())
                     .identityDocument(person.getIdentityDocument())
-                    .email(person.getEmail())
                     .address(addressMapper.toAddressTO(person.getAddress()))
+                    .contacts(contactMapper.contactTOS(person.getContacts()))
                     .build();
         }
         return null;
@@ -44,8 +46,8 @@ public class PersonMapper {
                     .name(to.getName())
                     .dateBirth(to.getDateBirth())
                     .identityDocument(to.getIdentityDocument())
-                    .email(to.getEmail())
                     .address(addressMapper.toAddress(to.getAddress()))
+                    .contacts(contactMapper.contacts(to.getContacts()))
                     .build();
         }
         return null;

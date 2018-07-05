@@ -14,11 +14,11 @@ import java.time.LocalDate;
 @Repository
 public interface PersonRepository extends PagingAndSortingRepository<Person,Integer> {
 
-    @Query("SELECT p FROM Person p WHERE p.name like :name or p.identityDocument = :identityDocument or email = :email or dateBirth = :dateBirth")
+    @Query("SELECT p FROM Person p JOIN p.contacts c WHERE p.name like :name or p.identityDocument = :identityDocument or c.value = :contact or p.dateBirth = :dateBirth")
     Page<Person> findByNameOrIdentityDocumentOrEmailOrDateBirth(
             @Param("name") String name,
             @Param("identityDocument") String identityDocument,
-            @Param("email") String email,
+            @Param("contact") String contact,
             @Param("dateBirth") LocalDate dateBirth, Pageable pageRequest);
 
 }

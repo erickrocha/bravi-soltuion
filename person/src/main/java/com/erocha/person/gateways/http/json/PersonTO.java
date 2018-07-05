@@ -3,6 +3,7 @@ package com.erocha.person.gateways.http.json;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,7 +16,7 @@ public class PersonTO {
     private String name;
     private LocalDate dateBirth;
     private String identityDocument;
-    private String email;
     private AddressTO address;
+    private List<ContactTO> contacts;
 
 }

@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "PERSON")
@@ -28,10 +29,12 @@ public class Person implements Serializable {
     @Column(name = "IDENTITY_DOCUMENT")
     private String identityDocument;
 
-    @Column(name = "EMAIL")
-    private String email;
-
     @Embedded
     private Address address;
+
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+    @JoinColumn(name = "PERSON_ID")
+    @Singular
+    private List<Contact> contacts;
 
 }
