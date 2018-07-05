@@ -3,6 +3,7 @@ package com.erocha.person.usecases;
 import com.erocha.person.domains.Contact;
 import com.erocha.person.domains.Person;
 import com.erocha.person.gateways.PersonGateway;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -10,6 +11,7 @@ import java.util.Optional;
 @Service
 public class RemoveContact {
 
+    @Autowired
     private PersonGateway gateway;
 
     public void execute(Integer personId, Integer contactId){

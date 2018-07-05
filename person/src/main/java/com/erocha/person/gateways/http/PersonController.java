@@ -115,7 +115,7 @@ public class PersonController {
         addContact.execute(personId,contact);
     }
 
-    @PatchMapping("/persons/{personId}/contacts/{contactId}")
+    @DeleteMapping("/persons/{personId}/contacts/{contactId}")
     @ApiOperation(value = "Remove a Contact from a Person")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiResponses(value = {
