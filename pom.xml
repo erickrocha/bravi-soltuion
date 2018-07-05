@@ -18,6 +18,7 @@
 
     <modules>
         <module>brackets</module>
+        <module>person</module>
     </modules>
 
     <!-- Tests dependencies -->
