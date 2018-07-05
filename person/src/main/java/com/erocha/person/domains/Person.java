@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -36,5 +37,12 @@ public class Person implements Serializable {
     @JoinColumn(name = "PERSON_ID")
     @Singular
     private List<Contact> contacts;
+
+    public void addContact(Contact contact){
+        if (this.contacts == null){
+            this.contacts = new ArrayList<>();
+        }
+        this.contacts.add(contact);
+    }
 
 }

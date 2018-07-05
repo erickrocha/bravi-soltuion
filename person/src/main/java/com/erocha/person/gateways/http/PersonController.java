@@ -1,12 +1,12 @@
 package com.erocha.person.gateways.http;
 
+import com.erocha.person.domains.Contact;
 import com.erocha.person.domains.Person;
+import com.erocha.person.gateways.http.json.ContactTO;
 import com.erocha.person.gateways.http.json.PersonTO;
+import com.erocha.person.gateways.http.mapper.ContactMapper;
 import com.erocha.person.gateways.http.mapper.PersonMapper;
-import com.erocha.person.usecases.AddPerson;
-import com.erocha.person.usecases.GetPerson;
-import com.erocha.person.usecases.RemovePerson;
-import com.erocha.person.usecases.UpdatePerson;
+import com.erocha.person.usecases.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -40,6 +40,12 @@ public class PersonController {
 
     @Autowired
     private UpdatePerson updatePerson;
+
+    @Autowired
+    private AddContact addContact;
+
+    @Autowired
+    private RemoveContact removeContact;
 
     @GetMapping("/persons")
     @ApiOperation(value = "Get All Persons", response = PersonTO.class)
@@ -94,6 +100,29 @@ public class PersonController {
     })
     public void delete(@PathVariable("id") Integer id) {
         removePerson.execute(id);
+    }
+
+
+    @PatchMapping("/persons/{personId}/contacts")
+    @ApiOperation(value = "Delete a Person")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Entity created"),
+            @ApiResponse(code = 404, message = "Not found")
+    })
+    public void addContact(@PathVariable("personId") Integer personId,@Valid @RequestBody ContactTO contactTO){
+        ContactMapper mapper = new ContactMapper();
+        Contact contact = mapper.toContact(contactTO);
+        addContact.execute(personId,contact);
+    }
+
+    @PatchMapping("/persons/{personId}/contacts/{contactId}")
+    @ApiOperation(value = "Delete a Person")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Entity created"),
+            @ApiResponse(code = 404, message = "Not found")
+    })
+    public void addContact(@PathVariable("personId") Integer personId,@PathVariable("contactId") Integer contactId){
+        removeContact.execute(personId,contactId);
     }
 
 }
