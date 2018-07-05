@@ -35,14 +35,13 @@ public class Person implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "PERSON_ID")
-    @Singular
     private List<Contact> contacts;
 
     public void addContact(Contact contact){
         if (this.contacts == null){
             this.contacts = new ArrayList<>();
         }
-        this.contacts.add(contact);
+        this.getContacts().add(contact);
     }
 
 }

@@ -21,7 +21,7 @@ public class RestErrorHandler extends DefaultHandlerExceptionResolver {
     @ExceptionHandler(BusinessException.class)
     @ResponseBody
     @ResponseStatus(value = UNPROCESSABLE_ENTITY)
-    public Response businessException(BusinessException ex,final HttpServletRequest request){
-        return new Response(UNPROCESSABLE_ENTITY,ex.getCode(),ex.getMessage());
+    public Response businessException(BusinessException ex, final HttpServletRequest request) {
+        return new Response(UNPROCESSABLE_ENTITY, ex.getCode(), ex.getMessage());
     }
 }
