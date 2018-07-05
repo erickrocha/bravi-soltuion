@@ -104,9 +104,9 @@ public class PersonController {
 
 
     @PatchMapping("/persons/{personId}/contacts")
-    @ApiOperation(value = "Delete a Person")
+    @ApiOperation(value = "Add Contact to a Person")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Entity created"),
+            @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 404, message = "Not found")
     })
     public void addContact(@PathVariable("personId") Integer personId,@Valid @RequestBody ContactTO contactTO){
@@ -116,9 +116,10 @@ public class PersonController {
     }
 
     @PatchMapping("/persons/{personId}/contacts/{contactId}")
-    @ApiOperation(value = "Delete a Person")
+    @ApiOperation(value = "Remove a Contact from a Person")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Entity created"),
+            @ApiResponse(code = 204, message = "No Content"),
             @ApiResponse(code = 404, message = "Not found")
     })
     public void addContact(@PathVariable("personId") Integer personId,@PathVariable("contactId") Integer contactId){
