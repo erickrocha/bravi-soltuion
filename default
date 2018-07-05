@@ -1,0 +1,8 @@
+server {
+   listen 80 default_server;
+   root /apps/weather;
+   server_name weather.com.br;
+   index index.html index.htm;
+   location / {
+   }
+}
