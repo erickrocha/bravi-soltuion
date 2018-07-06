@@ -26,6 +26,8 @@ That solution is compose by 3 different applications
 First one
 ### Brackets
    This application is a java application 
+   All test are passing. 
+   You can see this application running in tests cases
 
 ### Person
   This application is a java 8 application with spring-boot framework.
@@ -84,7 +86,7 @@ after the image built
 
 `docker run -p 80:80 -p 8080:8080 bravi-solution`
 
-for all ways after application deployed
+After application deployed
 
 access http://localhost
 
