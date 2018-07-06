@@ -30,7 +30,7 @@ RUN apt install -y nginx
 
 RUN mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.old
 
-ADD wheater/dist/ /apps
+ADD weather/dist/ /apps
 
 COPY default /etc/nginx/sites-available/
 
